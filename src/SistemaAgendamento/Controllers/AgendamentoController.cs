@@ -40,22 +40,22 @@ namespace SistemaAgendamento.WebApi.Controllers
             try
             {
 
-                Agenda agenda = await _context.AgendaRepository.GetById(request.AgendaIdAgenda);
-                Cliente cliente = await _context.ClienteRepository.GetById(request.ClienteIdCliente);
+                ////Agenda agenda = await _context.AgendaRepository.GetById(request.AgendaIdAgenda);
+                ////Cliente cliente = await _context.ClienteRepository.GetById(request.ClienteIdCliente);
 
-                if (agenda == null || cliente == null)
-                {
-                    return NotFound("Cliente e/ou Agenda não encontrado(s).");
-                }
+                ////if (agenda == null || cliente == null)
+                ////{
+                ////    return NotFound("Cliente e/ou Agenda não encontrado(s).");
+                ////}
 
-                if (_context.AgendamentoRepository.AddNewAgendamento(agendamento, cliente, agenda).Equals("Agendamento realizado com sucesso!"))
-                {
-                    return Ok("Sucesso.");
-                }
-                else
-                {
-                    return BadRequest("Não foi possivel concluir agendamento.");
-                }
+                ////if (_context.AgendamentoRepository.AddNewAgendamento(agendamento, cliente, agenda).Equals("Agendamento realizado com sucesso!"))
+                ////{
+                ////    return Ok("Sucesso.");
+                ////}
+                //else
+                //{
+                   return BadRequest("Não foi possivel concluir agendamento.");
+                //}
             }
             catch (Exception ex)
             {

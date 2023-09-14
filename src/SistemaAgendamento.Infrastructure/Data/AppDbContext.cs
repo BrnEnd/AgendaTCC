@@ -13,20 +13,16 @@ namespace SistemaAgendamento.Repository.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
         {
-            //this.Database.Migrate();
+            this.Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ConfigureEstabelecimento();
-            builder.ConfigureCliente();
-            builder.ConfigureAgenda();
             builder.ConfigureAgendamento();
         }
 
         public DbSet<Estabelecimento> Estabelecimentos { get; set; }
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Agenda> Agendas { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
     }
 }

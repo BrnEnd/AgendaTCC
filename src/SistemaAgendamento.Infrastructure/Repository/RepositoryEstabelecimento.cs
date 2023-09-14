@@ -18,7 +18,12 @@ namespace SistemaAgendamento.Repository.Repository
         }
         public List<Estabelecimento> GetEstabelecimentosAtivos()
         {
-            return _context.Set<Estabelecimento>().AsNoTracking().Where(p => p.Ativo.Equals("S")).ToList();
+            return _context.Set<Estabelecimento>().AsNoTracking().ToList();
+        }
+
+        public Estabelecimento GetEstabelecimentoByName(string name)
+        {
+            return _context.Set<Estabelecimento>().Where(x => x.NomeEstabelecimento.Contains(name)).FirstOrDefault();
         }
     }
     

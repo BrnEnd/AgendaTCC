@@ -33,32 +33,6 @@ namespace SistemaAgendamento.Controllers
             return Ok(response);
         }
 
-        [HttpGet("getById/{id}")]
-        public ActionResult<EstabelecimentoDto> GetById(int id)
-        {
-            var estabelecimento = _context.EstabelecimentoRepository.GetById(id).Result;
-            var response = _mapper.Map<EstabelecimentoDto>(estabelecimento);
-
-            if (response == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(response);
-            }
-
-        }
-
-        [HttpGet("getAllAtivos")]
-        public ActionResult<IEnumerable<EstabelecimentoDto>> GetAllAtivos()
-        {
-            var estabelecimentos = _context.EstabelecimentoRepository.GetEstabelecimentosAtivos().ToList();
-            var response = _mapper.Map<List<EstabelecimentoDto>>(estabelecimentos);
-
-            return Ok(response);
-        }
-
         [HttpPost("addNewEstabelecimento")]
         public IActionResult addNewEstabelecimento([FromBody] EstabelecimentoDto request)
         {
@@ -67,12 +41,7 @@ namespace SistemaAgendamento.Controllers
                 var estabelecimento = _mapper.Map<Estabelecimento>(request);
                 _context.EstabelecimentoRepository.Add(estabelecimento);
                 _context.Commit();
-                var agenda = new Agenda(estabelecimento.IdEstabelecimento, 'S');
-                estabelecimento.Agenda = agenda;
-                _context.EstabelecimentoRepository.Update(estabelecimento);
-                _context.Commit();
-
-                return Ok("Sucesso. ID do Estabelecimento: " + estabelecimento.IdEstabelecimento);
+               return Ok("Sucesso. Estabelecimento cadastrado. ");
 
             }
             catch (Exception ex)
@@ -80,16 +49,14 @@ namespace SistemaAgendamento.Controllers
                 throw new Exception("Erro ao persistir dado no banco.", ex);
             }
 
-
-
         }
 
-        [HttpPut("DesativarEstabelecimento/{id}")]
-        public IActionResult updateEstabelecimento(int id)
+        [HttpPut("DesativarEstabelecimento/{nomeEstabelecimento}")]
+        public IActionResult updateEstabelecimento(string nomeEstabelecimento)
         {
             try
             {
-                var estabelecimento = _context.EstabelecimentoRepository.GetById(id).Result;
+                var estabelecimento = _context.EstabelecimentoRepository.GetEstabelecimentoByName(nomeEstabelecimento);
                 estabelecimento.Ativo = 'N';
                 _context.EstabelecimentoRepository.Update(estabelecimento);
                 _context.Commit();

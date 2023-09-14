@@ -44,9 +44,7 @@ namespace SistemaAgendamento
             services.AddDbContext<AppDbContext>(opts => opts.UseMySQL(Configuration.GetConnectionString("Connection")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IEstabelecimentoRepository, RepositoryEstabelecimento>();
-            services.AddTransient<IAgendaRepository, RepositoryAgenda>();
             services.AddTransient<IAgendamentoRepository, RepositoryAgendamento>();
-            services.AddTransient<IClienteRepository, RepositoryCliente>();
 
 
             services.AddControllers();

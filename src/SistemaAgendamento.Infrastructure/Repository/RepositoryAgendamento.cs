@@ -16,9 +16,9 @@ namespace SistemaAgendamento.Repository.Repository
         {
         }
 
-        public string AddNewAgendamento(Agendamento agendamento, Cliente cliente, Agenda agenda)
+        public string AddNewAgendamento(Agendamento agendamento)
         {      
-                var agendaDisponivel = _context.Agendamentos.AsTracking().Where(a => a.AgendaIdAgenda == agendamento.AgendaIdAgenda && a.StatusAgendamento == (int)Status.Espera).ToList();
+                var agendaDisponivel = _context.Agendamentos.AsTracking().Where(a => a.StatusAgendamento == (int)Status.Espera).ToList();
 
                 foreach(var item in agendaDisponivel)
                 {
@@ -28,13 +28,10 @@ namespace SistemaAgendamento.Repository.Repository
                     }
                 }
 
-                var _agendamento = new Agendamento(Guid.NewGuid(), agendamento.DiaHoraAgendamento, (int)Status.Espera);
-                _agendamento.Agenda = agenda;
-                _agendamento.Cliente = cliente;
-                _agendamento.AgendaIdAgenda = _agendamento.Agenda.IdAgenda;
-                _agendamento.AgendaIdAgenda = _agendamento.Cliente.IdCliente;
-                _context.Agendamentos.Add(_agendamento);
-                _context.SaveChanges();
+                //var _agendamento = new Agendamento(Guid.NewGuid(), agendamento.DiaHoraAgendamento, (int)Status.Espera);
+                
+                //_context.Agendamentos.Add(_agendamento);
+                //_context.SaveChanges();
                 return "Agendamento realizado com sucesso!";
           
         }

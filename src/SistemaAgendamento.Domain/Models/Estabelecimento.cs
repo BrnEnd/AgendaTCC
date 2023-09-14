@@ -32,10 +32,5 @@ namespace SistemaAgendamento.Domain.Models
         public string NomeProfissional { get; set; }
         public char Ativo { get; set; }
 
-        public Agenda Agenda { get; set; }
-
-
-
-
     }
 }

@@ -9,7 +9,6 @@ namespace SistemaAgendamento.Repository.DTOs.Profiles
         {
             CreateMap<Agendamento, AgendamentoDto>().ReverseMap();
             CreateMap<Estabelecimento, EstabelecimentoDto>().ReverseMap();
-            CreateMap<Cliente, ClienteDto>().ReverseMap();
         }   
     }
 }

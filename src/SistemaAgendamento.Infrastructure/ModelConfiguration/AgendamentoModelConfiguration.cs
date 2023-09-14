@@ -19,23 +19,27 @@ namespace SistemaAgendamento.Repository.ModelConfiguration
                 .HasKey(a => a.IdAgendamento);
 
             builder.Entity<Agendamento>()
-             .HasOne(e => e.Agenda)
-             .WithMany(a => a.Agendamentos);
-
+                .HasOne(e => e.EstabelecimentoIDEstabelecimento);
+                
             builder.Entity<Agendamento>()
                 .Property(a => a.DiaHoraAgendamento)
                 .HasColumnType("DateTime")
                 .IsRequired();
 
             builder.Entity<Agendamento>()
-                .Property(a => a.StatusAgendamento)
-                .HasConversion<int>()
+                .Property(a => a.NomeCliente)
+                .HasColumnType("varchar(100)")
+                .IsRequired();
+           
+            builder.Entity<Agendamento>()
+                .Property(a => a.NomeProcedimento)
+                .HasColumnType("varchar(100)")
                 .IsRequired();
 
             builder.Entity<Agendamento>()
-                .HasOne(a => a.Cliente)
-                .WithMany(c => c.Agendamentos);
-
+                .Property(a => a.StatusAgendamento)
+                .HasConversion<int>()
+                .IsRequired();
 
             return builder;
         }

@@ -10,8 +10,6 @@ namespace SistemaAgendamento.Domain.Interfaces
     {
         IEstabelecimentoRepository EstabelecimentoRepository { get; }
         IAgendamentoRepository AgendamentoRepository { get; }
-        IClienteRepository ClienteRepository { get; }
-        IAgendaRepository AgendaRepository { get; }
 
         void Commit();
     }

@@ -10,6 +10,9 @@ namespace SistemaAgendamento.Domain.Interfaces
     public interface IEstabelecimentoRepository : IRepository<Estabelecimento>
     {
         List<Estabelecimento> GetEstabelecimentosAtivos();
-    
+
+        Estabelecimento GetEstabelecimentoByName(string name);
+
+
     }
 }
