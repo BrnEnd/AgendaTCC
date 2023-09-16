@@ -33,6 +33,15 @@ namespace SistemaAgendamento.Controllers
             return Ok(response);
         }
 
+        [HttpGet("getByName")]
+        public ActionResult<IEnumerable<EstabelecimentoDto>> Get(string estabelecimento)
+        {
+            var estabelecimentos = _context.EstabelecimentoRepository.GetEstabelecimentoByName(estabelecimento);
+            var response = _mapper.Map<EstabelecimentoDto>(estabelecimentos);
+
+            return Ok(response);
+        }
+
         [HttpPost("addNewEstabelecimento")]
         public IActionResult addNewEstabelecimento([FromBody] EstabelecimentoDto request)
         {
