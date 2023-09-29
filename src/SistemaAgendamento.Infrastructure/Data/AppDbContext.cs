@@ -13,7 +13,7 @@ namespace SistemaAgendamento.Repository.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
         {
-            this.Database.Migrate();
+            Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
