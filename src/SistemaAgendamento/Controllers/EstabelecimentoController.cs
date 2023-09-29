@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SistemaAgendamento.Domain.Interfaces;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace SistemaAgendamento.Controllers
 {
+    
     [ApiController]
     [Route("[controller]")]
     public class EstabelecimentoController : ControllerBase
@@ -47,7 +49,9 @@ namespace SistemaAgendamento.Controllers
         {
             try
             {
+
                 var estabelecimento = _mapper.Map<Estabelecimento>(request);
+                estabelecimento.Ativo = 'S';
                 _context.EstabelecimentoRepository.Add(estabelecimento);
                 _context.Commit();
                return Ok("Sucesso. Estabelecimento cadastrado. ");
