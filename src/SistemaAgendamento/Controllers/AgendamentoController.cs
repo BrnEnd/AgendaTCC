@@ -40,48 +40,28 @@ namespace SistemaAgendamento.WebApi.Controllers
             try
             {
 
-                ////Agenda agenda = await _context.AgendaRepository.GetById(request.AgendaIdAgenda);
-                ////Cliente cliente = await _context.ClienteRepository.GetById(request.ClienteIdCliente);
+                var estabelecimentoExist = _context.AgendamentoRepository.GetEstabelecimentoByName(agendamento.NomeEstabelecimento);
 
-                ////if (agenda == null || cliente == null)
-                ////{
-                ////    return NotFound("Cliente e/ou Agenda não encontrado(s).");
-                ////}
-
-                ////if (_context.AgendamentoRepository.AddNewAgendamento(agendamento, cliente, agenda).Equals("Agendamento realizado com sucesso!"))
-                ////{
-                ////    return Ok("Sucesso.");
-                ////}
-                //else
-                //{
-                   return BadRequest("Não foi possivel concluir agendamento.");
-                //}
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao persistir dado no banco.", ex);
-            }
-        }
-
-        [HttpPut("cancelarAgendamento/{Id:guid}")]
-        public async Task<ActionResult> CancelarAgendamentoAsync(Guid Id)
-        {
-            try
-            {
-                Agendamento agendamento = await _context.AgendamentoRepository.GetById(Id);
-
-                if (agendamento == null)
+                if (estabelecimentoExist == null)
                 {
-                    return NotFound("Agendamento não encontrado.");
+                    return NotFound("Estabelecimento não cadastrado.");
+                }
+                if (estabelecimentoExist.Ativo.Equals("N"))
+                {
+                    return BadRequest("Estabelecimento desativado.");
+                }
+                if (agendamento.NomeProcedimento == null)
+                {
+                    return NotFound("Por favor, adicione o nome do procedimento.");
                 }
 
-                if (_context.AgendamentoRepository.CancelarAgendamento(agendamento).Equals("Agendamento cancelado com sucesso!"))
+                if (_context.AgendamentoRepository.AddNewAgendamento(agendamento).Equals("Agendamento realizado com sucesso!"))
                 {
                     return Ok("Sucesso.");
                 }
                 else
                 {
-                    return BadRequest("Não foi possivel concluir cancelamento.");
+                    return BadRequest("Não foi possivel concluir agendamento.");
                 }
             }
             catch (Exception ex)
@@ -90,5 +70,33 @@ namespace SistemaAgendamento.WebApi.Controllers
             }
         }
 
+        //    [HttpPut("cancelarAgendamento/{Id:guid}")]
+        //    public async Task<ActionResult> CancelarAgendamentoAsync(Guid Id)
+        //    {
+        //        try
+        //        {
+        //            Agendamento agendamento = await _context.AgendamentoRepository.GetById(Id);
+
+        //            if (agendamento == null)
+        //            {
+        //                return NotFound("Agendamento não encontrado.");
+        //            }
+
+        //            if (_context.AgendamentoRepository.CancelarAgendamento(agendamento).Equals("Agendamento cancelado com sucesso!"))
+        //            {
+        //                return Ok("Sucesso.");
+        //            }
+        //            else
+        //            {
+        //                return BadRequest("Não foi possivel concluir cancelamento.");
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("Erro ao persistir dado no banco.", ex);
+        //        }
+        //    }
+
+        //}
     }
 }

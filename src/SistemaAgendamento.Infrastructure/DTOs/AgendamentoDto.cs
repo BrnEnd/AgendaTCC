@@ -6,8 +6,8 @@ namespace SistemaAgendamento.Repository.DTOs
     {
         public Guid IdAgendamento { get; set; }
         public string NomeCliente { get; set; }
-        public string Procedimento { get; set; }
-        public int AgendaIdAgenda { get; set; }
+        public string NomeProcedimento { get; set; }
+        public string NomeEstabelecimento { get; set; }
         public DateTime DiaHoraAgendamento { get; set; }
         public int StatusAgendamento { get; set; }
 

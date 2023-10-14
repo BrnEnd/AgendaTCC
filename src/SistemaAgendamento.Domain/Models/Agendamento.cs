@@ -30,16 +30,7 @@ namespace SistemaAgendamento.Domain.Models
 
         public string NomeCliente { get; set; }
         public string NomeProcedimento { get; set; }
-
-        public Estabelecimento EstabelecimentoIDEstabelecimento { get; set; }
-        public Agendamento(Guid idAgendamento, DateTime diaHoraAgendamento, int statusAgendamento, string nomeCliente, string nomeProcedimento)
-        {
-            IdAgendamento = idAgendamento;
-            DiaHoraAgendamento = diaHoraAgendamento;
-            StatusAgendamento = statusAgendamento;
-            NomeCliente = nomeCliente;
-            NomeProcedimento = nomeProcedimento;
-        }
+        public string NomeEstabelecimento { get; set; }
 
     }
 }

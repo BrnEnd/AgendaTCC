@@ -18,20 +18,11 @@ namespace SistemaAgendamento.Repository.Repository
 
         public string AddNewAgendamento(Agendamento agendamento)
         {      
-                var agendaDisponivel = _context.Agendamentos.AsTracking().Where(a => a.StatusAgendamento == (int)Status.Espera).ToList();
 
-                foreach(var item in agendaDisponivel)
-                {
-                    if (item.DiaHoraAgendamento == agendamento.DiaHoraAgendamento || item.DiaHoraAgendamento == agendamento.DiaHoraAgendamento.AddHours(1))
-                {
-                        return "Horário indisponível!";
-                    }
-                }
-
-                //var _agendamento = new Agendamento(Guid.NewGuid(), agendamento.DiaHoraAgendamento, (int)Status.Espera);
+                //var _agendamento = new Agendamento(Guid.NewGuid(), agendamento.DiaHoraAgendamento, agendamento.StatusAgendamento, agendamento.NomeCliente, agendamento.NomeProcedimento, agendamento.NomeEstabelecimento);
                 
-                //_context.Agendamentos.Add(_agendamento);
-                //_context.SaveChanges();
+                _context.Agendamentos.Add(agendamento);
+                _context.SaveChanges();
                 return "Agendamento realizado com sucesso!";
           
         }
@@ -43,6 +34,12 @@ namespace SistemaAgendamento.Repository.Repository
             _context.SaveChanges();
             return "Agendamento cancelado com sucesso!";
         }
+
+        public Estabelecimento GetEstabelecimentoByName(string name)
+        {
+            return _context.Set<Estabelecimento>().Where(x => x.NomeEstabelecimento.Contains(name)).FirstOrDefault();
+        }
+
     }
     
 }
