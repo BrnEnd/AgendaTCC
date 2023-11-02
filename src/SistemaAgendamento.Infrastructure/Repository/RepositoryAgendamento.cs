@@ -17,14 +17,22 @@ namespace SistemaAgendamento.Repository.Repository
         }
 
         public string AddNewAgendamento(Agendamento agendamento)
-        {      
+        {
 
-                //var _agendamento = new Agendamento(Guid.NewGuid(), agendamento.DiaHoraAgendamento, agendamento.StatusAgendamento, agendamento.NomeCliente, agendamento.NomeProcedimento, agendamento.NomeEstabelecimento);
-                
+            //var _agendamento = new Agendamento(Guid.NewGuid(), agendamento.DiaHoraAgendamento, agendamento.StatusAgendamento, agendamento.NomeCliente, agendamento.NomeProcedimento, agendamento.NomeEstabelecimento);
+                agendamento.StatusAgendamento = (int)Status.Espera;
                 _context.Agendamentos.Add(agendamento);
                 _context.SaveChanges();
                 return "Agendamento realizado com sucesso!";
           
+        }
+
+        public string AlterarAgendamento(Agendamento agendamento)
+        {
+            agendamento.StatusAgendamento = (int)Status.Espera;
+            _context.Update(agendamento);
+            _context.SaveChanges();
+            return "Agendamento alterado com sucesso!";
         }
 
         public string CancelarAgendamento(Agendamento agendamento)

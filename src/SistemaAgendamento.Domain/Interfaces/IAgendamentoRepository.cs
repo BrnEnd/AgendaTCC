@@ -12,7 +12,7 @@ namespace SistemaAgendamento.Domain.Interfaces
         public string AddNewAgendamento(Agendamento agendamento);
 
         public string CancelarAgendamento(Agendamento agendamento);
-
+        public string AlterarAgendamento(Agendamento agendamento);
         public Estabelecimento GetEstabelecimentoByName(string estabelecimento);
     }
 }

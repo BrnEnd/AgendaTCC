@@ -14,7 +14,7 @@ namespace SistemaAgendamento.Domain.Models
         private DateTime _diaHoraAgendamento;
         public DateTime DiaHoraAgendamento
         {
-            get => this._diaHoraAgendamento; private set
+            get => this._diaHoraAgendamento; set
             {
                 //if (value < DateTime.UtcNow)
                 //{
